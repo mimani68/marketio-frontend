@@ -8,6 +8,18 @@ input:focus {
   outline: none;
 }
 
+.rtl {
+  direction: rtl;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  margin:auto;
+}
+
 .wraper {
   text-align: center;
   padding-top: 20vh;
@@ -18,17 +30,12 @@ input:focus {
   align-content: stretch;
 }
 
-.center {
-  margin:auto;
-}
-
-.gLFyf {
+.search_input {
   background-color: transparent;
   border: none;
   margin: 0;
   padding: 0;
   color: rgba(0,0,0,.87);
-  margin-top: -37px;
   height: 34px;
   font-size: 16px;
   width: 30vw;
@@ -53,9 +60,7 @@ input:focus {
   align-items: center;
 }
 
-.search_input {
-  padding-top: 12px;
-}
+.search_input {}
 
 .search_bar {
   border: 1px dotted #cccccc;
@@ -68,4 +73,17 @@ input:focus {
   padding-right: 10px;
   color: #e49191;
 }
+
+.content_container {
+
+}
+
+.article {
+  border-radius: 15px;
+  box-shadow: 0px 0px 8px 0px #b1b1b1;
+  padding: 15px;
+  width: 70vw;
+  margin-bottom: 18px
+}
+
 
