@@ -1,13 +1,22 @@
+let BASE_URL = 'http://market.ir'
+
 function dev() {
   console.log("salam")
 }
 
 async function seach() {
-  console.log("salam")
   let keyword = 'news'
-  let query = `/q/${ keyword }/nonce/12`
-  let response = await fetch('http://localhost:3000' + query)
-  response.json()
+  // let query = `/q/${ keyword }/nonce/12`
+  // return await fetch(BASE_URL + query)
+  return await fetch('http://me:3000/dev/' + keyword + '?q=12')
+    .then((response) => {
+      return response.json()
+    })
+    .catch((err) => {
+      console.error(err)
+      return err
+    })
+
 }
 
 function eventListener() {
