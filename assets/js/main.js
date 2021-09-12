@@ -1,6 +1,7 @@
 let BASE_URL = 'http://market.local'
 let PORT = ':3000'
 let ENV = 'development'
+let RESULT_CHARACTER_LIMIT = 300;
 
 function dev() {
   log("salam")
@@ -37,15 +38,16 @@ function contentRender(articles) {
   }
   let tmp = ''
   for (let item of articles) {
-    tmp += "<div class=\"article\">"
+    let body = item.body.replace(/(<([^>]+)>)/gi, "")
+    tmp += "<div class=\"article text-primary\">"
     + "<h3>"
-    + item.title
+    + item.title.replace(/(<([^>]+)>)/gi, "")
     + "</h3>"
+    + "<div class=\"body text-primary\">"
+    + body.substring(0,RESULT_CHARACTER_LIMIT) + " [ادامه دارد]"
     + "</div>"
-    + "<div class=\"body\">"
-    + item.body
-    + "</div>"
-    + "<div class=\"url\">" + item.link + "</div>"
+    + "<div class=\"url text-link\">"
+    + item.link
     + "</div>"
     + "</div>"  
   }
