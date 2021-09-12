@@ -27,6 +27,31 @@ function noneGenerator() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
+function contentRender(articles) {
+  let contentWrapper = document.getElementsByClassName('content_container')[0]
+  if ( !contentWrapper ) {
+    return log("Html content wrapper dosn't exists")
+  }
+  if ( !articles ) {
+    return log("Articles dosn't exists")
+  }
+  let tmp = ''
+  for (let item of articles) {
+    tmp += "<div class=\"article\">"
+    + "<h3>"
+    + item.title
+    + "</h3>"
+    + "</div>"
+    + "<div class=\"body\">"
+    + item.body
+    + "</div>"
+    + "<div class=\"url\">" + item.link + "</div>"
+    + "</div>"
+    + "</div>"  
+  }
+  contentWrapper.innerHTML = tmp
+}
+
 function log(msg) {
   if ( ENV === 'development' ) {
     console.log(msg)
@@ -37,13 +62,15 @@ function eventListener() {
   document.getElementById("btn_search").onclick = x=>{
     seach()
       .then( data => {
+        contentRender(data.Data[0].Data)
         log(data)
       })
       .catch( err => {
-        error(err)
+        log(err)
       })
     document.getElementById('search_page').classList.add("hide")
     document.getElementById('result_page').classList.remove("hide")
+    
   }
 }
 

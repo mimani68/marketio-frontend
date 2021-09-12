@@ -74,9 +74,7 @@ input:focus {
   color: #e49191;
 }
 
-.content_container {
-
-}
+.content_container {}
 
 .article {
   border-radius: 15px;
