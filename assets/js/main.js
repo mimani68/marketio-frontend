@@ -1,32 +1,46 @@
-let BASE_URL = 'http://market.ir'
+let BASE_URL = 'http://market.local'
+let PORT = ':3000'
+let ENV = 'development'
 
 function dev() {
-  console.log("salam")
+  log("salam")
 }
 
 async function seach() {
-  let keyword = 'news'
-  // let query = `/q/${ keyword }/nonce/12`
-  // return await fetch(BASE_URL + query)
-  return await fetch('http://me:3000/dev/' + keyword + '?q=12')
+  let nonce = noneGenerator()
+  let keyword = document.getElementById('search_input').value
+  let q = 'کویری اینجاست'
+  let lo = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  let query = '/q/' + keyword + '/nonce/' + nonce + '?q=' + q + '&lo=' + btoa(lo)
+  log('[QUERY] ' + query)
+  return await fetch(BASE_URL + PORT + query )
     .then((response) => {
       return response.json()
     })
     .catch((err) => {
-      console.error(err)
+      log(err)
       return err
     })
+}
 
+function noneGenerator() {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+function log(msg) {
+  if ( ENV === 'development' ) {
+    console.log(msg)
+  }
 }
 
 function eventListener() {
   document.getElementById("btn_search").onclick = x=>{
     seach()
       .then( data => {
-        console.log(data)
+        log(data)
       })
       .catch( err => {
-        console.error(err)
+        error(err)
       })
     document.getElementById('search_page').classList.add("hide")
     document.getElementById('result_page').classList.remove("hide")
