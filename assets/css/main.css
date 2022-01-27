@@ -148,6 +148,7 @@ input:focus {
 .search_button {
   padding-right: 10px;
   color: #e49191;
+  cursor: pointer;
 }
 
 .article {

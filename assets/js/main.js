@@ -22,10 +22,6 @@ async function seach() {
     })
 }
 
-function noneGenerator() {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
-
 function contentRender(tag, articles) {
   let contentWrapper = document.getElementsByClassName(tag)[0]
   if ( !contentWrapper ) {
