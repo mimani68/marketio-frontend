@@ -1,22 +1,20 @@
-let BASE_URL = 'http://market.local'
+let BASE_URL = 'http://market.ir'
 let PORT = ':3000'
 let ENV = 'development'
-let RESULT_CHARACTER_LIMIT = 300;
+let RESULT_CHARACTER_LIMIT = 150;
 
 function dev() {
   log("salam")
 }
 
 async function seach() {
-  let nonce = noneGenerator()
   let keyword = document.getElementById('search_input').value
-  let q = 'کویری اینجاست'
-  let lo = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  let query = '/q/' + keyword + '/nonce/' + nonce + '?q=' + q + '&lo=' + btoa(lo)
+  let query = '/q/' + keyword
   log('[QUERY] ' + query)
   return await fetch(BASE_URL + PORT + query )
-    .then((response) => {
-      return response.json()
+    .then( async response => {
+      let e = await response.json()
+      return e;
     })
     .catch((err) => {
       log(err)
@@ -28,27 +26,32 @@ function noneGenerator() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
-function contentRender(articles) {
-  let contentWrapper = document.getElementsByClassName('content_container')[0]
+function contentRender(tag, articles) {
+  let contentWrapper = document.getElementsByClassName(tag)[0]
   if ( !contentWrapper ) {
     return log("Html content wrapper dosn't exists")
   }
   if ( !articles ) {
     return log("Articles dosn't exists")
   }
-  let tmp = ''
+  let tmp = '<h2>کانال</h2>'
   for (let item of articles) {
-    let body = item.body.replace(/(<([^>]+)>)/gi, "")
     tmp += "<div class=\"article text-primary\">"
     + "<h3>"
-    + item.title.replace(/(<([^>]+)>)/gi, "")
+    + item.title
     + "</h3>"
-    + "<div class=\"body text-primary\">"
-    + body.substring(0,RESULT_CHARACTER_LIMIT) + " [ادامه دارد]"
-    + "</div>"
-    + "<div class=\"url text-link\">"
+    + "<span class=\"body text-primary text-fade\">"
+    + "..." + item.preText.substring(item.preText.length - RESULT_CHARACTER_LIMIT, item.preText.length )
+    + "</span>"
+    + "<span class=\"body text-primary\">"
+    + item.boldText
+    + "</span>"
+    + "<span class=\"body text-primary text-fade\">"
+    + item.postText.substring(0, RESULT_CHARACTER_LIMIT) + " [ادامه دارد]"
+    + "</span>"
+    + "<div class=\"url text-link ltr\"><a href=\"" + item.link + "\">"
     + item.link
-    + "</div>"
+    + "</a></div>"
     + "</div>"  
   }
   contentWrapper.innerHTML = tmp
@@ -64,8 +67,9 @@ function eventListener() {
   document.getElementById("btn_search").onclick = x=>{
     seach()
       .then( data => {
-        contentRender(data.Data[0].Data)
+        log(data.meta)
         log(data)
+        contentRender("channels", data.channel)
       })
       .catch( err => {
         log(err)
