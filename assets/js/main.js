@@ -1,7 +1,7 @@
 let BASE_URL = 'http://market.ir'
 let PORT = ':3000'
 let ENV = 'development'
-let RESULT_CHARACTER_LIMIT = 150;
+let RESULT_CHARACTER_LIMIT = 350;
 
 function dev() {
   log("salam")
@@ -47,7 +47,7 @@ function contentRender(tag, articles) {
     + item.boldText
     + "</span>"
     + "<span class=\"body text-primary text-fade\">"
-    + item.postText.substring(0, RESULT_CHARACTER_LIMIT) + " [ادامه دارد]"
+    + item.postText.substring(0, RESULT_CHARACTER_LIMIT)
     + "</span>"
     + "<div class=\"url text-link ltr\"><a href=\"" + item.link + "\">"
     + item.link

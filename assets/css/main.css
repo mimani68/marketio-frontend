@@ -152,12 +152,21 @@ input:focus {
 
 .article {
   border-radius: 15px;
-  box-shadow: 0px 0px 8px 0px #ebe8e8;
+  box-shadow: 0px 0px 8px 0px #e0dfdf;
   padding: 15px;
   width: 70vw;
   margin-bottom: 18px
 }
+
+.article:hover {
+  background: #f5f3f3;
+  box-shadow: 0px 0px 8px 0px #d3d3d3;
+  transition: all 200ms ease-in-out;
+}
+
 .article h3 {
+  text-align: right;
+  margin-top: 5px;
   font-size: 15pt;
 }
 
@@ -167,8 +176,9 @@ input:focus {
 }
 
 .article .url {
-  font-size: 12pt;
+  text-align: left;
   padding-top: 15px;
+  font-size: 12pt;
 }
 
 #result_page .wraper {
