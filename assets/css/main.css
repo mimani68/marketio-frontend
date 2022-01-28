@@ -98,8 +98,8 @@ input:focus {
   color: #5b6273;
 }
 
-.text-link {
-  color: #1c47ad;
+.text-link a {
+  color: #fb6767;
 }
 
 .text-fade {
@@ -135,8 +135,6 @@ input:focus {
   justify-content: center;
   align-items: center;
 }
-
-.search_input {}
 
 .search_bar {
   border: 1px dotted #cccccc;
